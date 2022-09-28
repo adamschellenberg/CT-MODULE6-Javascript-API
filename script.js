@@ -1,7 +1,6 @@
 // Get crypto data
 const getData = async () => {
     const accessKey = "350971061a2cdedabae11fd2775bd7b2";
-    const desiredCryptos = ["BTC", "ETH", "USDT", "TRUMP", "BNB", "DRGN", "XRP", "ADA", "SMART", "DOGE"];
     let response = await fetch(`http://api.coinlayer.com/api/live?access_key=${accessKey}`);
     let data = await response.json();
     return data;
@@ -9,7 +8,8 @@ const getData = async () => {
 
 // Create constants to hold DOM elements
 const DOMElements = {
-    cryptoList : ".crypto-card-div"
+    cryptoList : ".crypto-card-div",
+    subtitle : ".subtitle"
 }
 
 // Create the Crypto List HTML
@@ -25,14 +25,24 @@ const createList = ( name, rate ) => {
     document.querySelector(DOMElements.cryptoList).insertAdjacentHTML('beforeend', html);
 }
 
+const updateSubtitle = ( count ) => {
+    const html = `
+        <h6 class="lead">Current rates on ${count} crypto currencies</h6>
+    `;
+    document.querySelector(DOMElements.subtitle).insertAdjacentHTML('beforeend', html);
+}
+
 // FUnctions to load data and display the HTML
 const loadData = async () => {
     const cryptos = await getData();
+    let count = 0;
     let cryptoList = cryptos['rates'];
     for (const crypto in cryptoList) {
         createList(crypto, cryptoList[crypto]);
-        console.log(`crypto: ${crypto} and rate: ${cryptoList[crypto]}`)
+        count ++;
     }
+
+    updateSubtitle(count);
 }
 
 const clearData = () => {
