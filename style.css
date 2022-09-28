@@ -1,5 +1,30 @@
 body {
     background-color: #111111;
-    /* color: #17CB49; */
-    color: #168FFF
+    color: #17CB49;
+    /* color: #168FFF */
+}
+
+.display-2 {
+    color: #17CB49;
+}
+
+.row {
+    width: 90%;
+    margin: auto;
+}
+
+.card {
+    width: 120px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    font-size: .85rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: .85rem;
 }
